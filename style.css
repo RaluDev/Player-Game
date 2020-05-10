@@ -1,0 +1,7 @@
+.gameContainer {
+    width: 400px;
+    height: 400px;
+    background: rgb(240, 148, 198);
+    position: relative;
+  }
+

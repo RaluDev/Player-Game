@@ -6,6 +6,8 @@ class Player {
     constructor() {
       this.div = Player.display();
       this.move();
+      this.collideWall();
+      // this.gameContainer = gameContainer;
     }
   
     // logica de miscare
@@ -21,6 +23,7 @@ class Player {
         case 'ArrowRight': this.div.style.left = `${parseInt(this.div.style.left) + position}px`; break;
 
       }
+      this.collideWall();
 
 
     })
@@ -30,6 +33,7 @@ class Player {
 
     // afisarea div-ului
     static display() {
+      const gameContainer = document.querySelector('.gameContainer');
       const div = document.createElement('div');
       const { style } = div;
       style.width = "20px";
@@ -41,15 +45,51 @@ class Player {
       style.right = "20px";
       style.left = "20px";
   
-      document.body.appendChild(div);
+      gameContainer.appendChild(div);
   
   
   
       return div;
   
     }
+
+  //wall collision
+  collideWall() {
+    const gameContainer = document.querySelector('.gameContainer');
+    let playerTop = parseInt(this.div.style.top);
+    let playerBottom = parseInt(this.div.style.left);
+
+    const maxHeight = gameContainer.offsetHeight;
+    const maxWidth = gameContainer.offsetWidth;
+    const move = 20;
+
+
+    if (playerTop === maxHeight) {
+
+      alert("Hit the wall down!")
+
+    } else if (playerTop === - move) {
+      alert("Hit the wall up!")
+
+    } else if (playerBottom === - move) {
+      alert("Hit the wall left!")
+
+    } else if (playerBottom === maxWidth) {
+      alert("Hit the wall right!")
+
+    }
+  }
+
   }
 
   const player1 = new Player();
+  //collide apel
+  player1.collideWall();
+
+  
+  //reload button
+  document.getElementById('reload').addEventListener('click', function(){
+    window.location.reload();
+})
   
   
